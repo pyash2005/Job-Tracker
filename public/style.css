@@ -1,0 +1,896 @@
+/* ==========================================================================
+   CSS RESET & VARIABLES
+   ========================================================================== */
+:root {
+  /* Color Scheme */
+  --bg-main: #0f0f0f;
+  --bg-card: #1a1a1a;
+  --bg-card-hover: #222222;
+  --bg-input: #121212;
+  --border-color: #2a2a2a;
+  
+  --accent-color: #6c63ff;
+  --accent-hover: #574feb;
+  --accent-glow: rgba(108, 99, 255, 0.25);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #606060;
+
+  /* Status Colors */
+  --status-applied: #3b82f6;
+  --status-interview: #f59e0b;
+  --status-offer: #10b981;
+  --status-rejected: #ef4444;
+
+  --status-applied-bg: rgba(59, 130, 246, 0.15);
+  --status-interview-bg: rgba(245, 158, 11, 0.15);
+  --status-offer-bg: rgba(16, 185, 129, 0.15);
+  --status-rejected-bg: rgba(239, 68, 68, 0.15);
+
+  /* Fonts & Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Utilities */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-round: 50px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  
+  --max-width: 1200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ==========================================================================
+   HEADER / STICKY NAVBAR
+   ========================================================================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition-normal);
+}
+
+.header-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 30%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.briefcase-icon {
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.header-badge-container {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.badge {
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-round);
+  font-size: 0.8rem;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+/* ==========================================================================
+   MAIN CONTAINER & GRID LAYOUT
+   ========================================================================== */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Dashboard Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-info h3 {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+}
+
+/* Stats specific colors */
+.stat-card[data-status="Total"] .stat-number { color: var(--text-primary); }
+.stat-card[data-status="Total"] .total-icon { color: var(--accent-color); border-color: rgba(108, 99, 255, 0.3); }
+
+.stat-card[data-status="Interview"] .stat-number { color: var(--status-interview); }
+.stat-card[data-status="Interview"] .interview-icon { color: var(--status-interview); border-color: rgba(245, 158, 11, 0.3); }
+
+.stat-card[data-status="Offer"] .stat-number { color: var(--status-offer); }
+.stat-card[data-status="Offer"] .offer-icon { color: var(--status-offer); border-color: rgba(16, 185, 129, 0.3); }
+
+.stat-card[data-status="Rejected"] .stat-number { color: var(--status-rejected); }
+.stat-card[data-status="Rejected"] .rejected-icon { color: var(--status-rejected); border-color: rgba(239, 68, 68, 0.3); }
+
+/* Main App Layout Columns */
+.app-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ==========================================================================
+   FORM CONTAINER
+   ========================================================================== */
+.form-container {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-container h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.form-container h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 40px;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: var(--radius-round);
+}
+
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.required {
+  color: var(--status-rejected);
+}
+
+input[type="text"],
+input[type="url"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 0.75rem;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Date Picker adjustments */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  box-shadow: 0 6px 16px rgba(108, 99, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background-color: var(--status-rejected);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Loading Spinner inside Button */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   FILTER BAR
+   ========================================================================== */
+.filter-bar {
+  margin-bottom: 1.25rem;
+}
+
+.filter-scroll-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+/* Hide scrollbars for filter bar */
+.filter-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.filter-scroll-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filter-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-round);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
+}
+
+/* ==========================================================================
+   JOBS LIST SECTION
+   ========================================================================== */
+.jobs-list-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.jobs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.jobs-table th,
+.jobs-table td {
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.jobs-table th {
+  background-color: rgba(255, 255, 255, 0.02);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.actions-header {
+  text-align: right;
+}
+
+.jobs-table tbody tr {
+  transition: var(--transition-fast);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.jobs-table tbody tr:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.jobs-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Row elements styling */
+.company-cell {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.role-cell {
+  color: var(--text-secondary);
+}
+
+.date-cell {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.link-cell a {
+  color: var(--accent-color);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.link-cell a:hover {
+  text-decoration: underline;
+}
+
+.notes-cell {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-round);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge[data-status="Applied"] {
+  background-color: var(--status-applied-bg);
+  color: var(--status-applied);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-badge[data-status="Interview"] {
+  background-color: var(--status-interview-bg);
+  color: var(--status-interview);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-badge[data-status="Offer"] {
+  background-color: var(--status-offer-bg);
+  color: var(--status-offer);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-badge[data-status="Rejected"] {
+  background-color: var(--status-rejected-bg);
+  color: var(--status-rejected);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Action Buttons */
+.action-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-icon:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-icon-edit:hover {
+  color: var(--status-interview);
+  border-color: rgba(245, 158, 11, 0.3);
+  background-color: var(--status-interview-bg);
+}
+
+.btn-icon-delete:hover {
+  color: var(--status-rejected);
+  border-color: rgba(239, 68, 68, 0.3);
+  background-color: var(--status-rejected-bg);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.empty-state-icon {
+  color: var(--text-muted);
+  background-color: rgba(255, 255, 255, 0.02);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border-color);
+}
+
+.empty-state-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+/* ==========================================================================
+   MODAL / OVERLAYS
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: justify;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.modal-card form {
+  padding: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Confirmation dialog specific card */
+.confirmation-card {
+  max-width: 400px;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.confirmation-icon {
+  color: var(--status-rejected);
+  background-color: var(--status-rejected-bg);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.confirmation-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.confirmation-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.confirmation-card .modal-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATIONS
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 380px;
+  width: calc(100% - 3rem);
+  pointer-events: none;
+}
+
+.toast {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1), fadeOut 0.3s ease-out 2.7s forwards;
+}
+
+.toast-success {
+  border-left: 4px solid var(--status-offer);
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.05) 0%, rgba(0,0,0,0) 100%), var(--bg-card);
+}
+
+.toast-success svg {
+  color: var(--status-offer);
+}
+
+.toast-error {
+  border-left: 4px solid var(--status-rejected);
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, rgba(0,0,0,0) 100%), var(--bg-card);
+}
+
+.toast-error svg {
+  color: var(--status-rejected);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); visibility: hidden; }
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+/* Tablet & Smaller Layout (below 1200px) */
+@media (max-width: 1199px) {
+  .app-layout {
+    grid-template-columns: 1fr; /* Stacks form on top of list */
+    gap: 2.5rem;
+  }
+  
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+    gap: 1rem;
+  }
+}
+
+/* Mobile Layout (below 768px) */
+@media (max-width: 767px) {
+  .header-container {
+    padding: 0.85rem 1rem;
+  }
+  
+  .logo h1 {
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr; /* 1 col */
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+  }
+
+  .form-container {
+    padding: 1.25rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; /* Stacks inputs inside rows */
+    gap: 1.25rem;
+  }
+
+  .jobs-table th,
+  .jobs-table td {
+    padding: 0.85rem 1rem;
+  }
+  
+  .toast-container {
+    top: 1rem;
+    right: 1rem;
+    width: calc(100% - 2rem);
+  }
+}
